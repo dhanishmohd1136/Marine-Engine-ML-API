@@ -1,0 +1,37 @@
+# Virtual environments
+myenv/
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Trained models
+models/*.pkl
+models/*.joblib
+
+# Processed data
+data/processed/*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
