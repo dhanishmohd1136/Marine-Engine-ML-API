@@ -18,11 +18,22 @@ __pycache__/
 .env
 
 # Trained models
+*.pkl
+*.joblib
 models/*.pkl
 models/*.joblib
+backend/models/*.joblib
+backend/models/*.pkl
+!backend/models/.gitkeep
 
 # Processed data
 data/processed/*
+backend/data/processed/*
+!backend/data/processed/.gitkeep
+
+# Pytest & caches
+.pytest_cache/
+
 
 # Logs
 *.log

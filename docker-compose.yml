@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: marine-engine-ml-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/backend/models/marine_engine_model.joblib
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/models:/app/backend/models
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - marine-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: marine-engine-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - marine-network
+
+networks:
+  marine-network:
+    driver: bridge
